@@ -81,6 +81,57 @@ document.addEventListener("pointermove", (event) => {
 const rail = document.querySelector(".product-rail");
 const previousButton = document.querySelector(".rail-button--prev");
 const nextButton = document.querySelector(".rail-button--next");
+let railCycleWidth = 0;
+
+if (rail) {
+  const originalCards = Array.from(rail.querySelectorAll(".product-card"));
+
+  originalCards.forEach((card) => {
+    const clone = card.cloneNode(true);
+    clone.setAttribute("aria-hidden", "true");
+    clone.dataset.clone = "true";
+    rail.append(clone);
+  });
+
+  [...originalCards].reverse().forEach((card) => {
+    const clone = card.cloneNode(true);
+    clone.setAttribute("aria-hidden", "true");
+    clone.dataset.clone = "true";
+    rail.prepend(clone);
+  });
+
+  const updateRailCycle = () => {
+    const firstCard = rail.querySelector(".product-card");
+    const gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
+    const cardWidth = firstCard?.getBoundingClientRect().width || 0;
+    railCycleWidth = (cardWidth + gap) * originalCards.length;
+  };
+
+  requestAnimationFrame(() => {
+    updateRailCycle();
+    rail.scrollLeft = railCycleWidth;
+    rail.classList.add("is-loop-ready");
+  });
+
+  let railFrame;
+  rail.addEventListener("scroll", () => {
+    cancelAnimationFrame(railFrame);
+    railFrame = requestAnimationFrame(() => {
+      if (!railCycleWidth) return;
+      if (rail.scrollLeft >= railCycleWidth * 2) {
+        rail.scrollLeft -= railCycleWidth;
+      } else if (rail.scrollLeft <= 1) {
+        rail.scrollLeft += railCycleWidth;
+      }
+    });
+  }, { passive: true });
+
+  window.addEventListener("resize", () => {
+    const progress = railCycleWidth ? rail.scrollLeft / railCycleWidth : 1;
+    updateRailCycle();
+    rail.scrollLeft = railCycleWidth * progress;
+  });
+}
 
 const moveRail = (direction) => {
   if (!rail) return;
