@@ -1476,3 +1476,214 @@ button {
   .moment-grid { grid-template-columns: 1fr; }
   .moment { width: min(88vw, 330px); }
 }
+
+/* Revision 03 — readable hero, compact rhythm */
+.hero-stage {
+  isolation: isolate;
+}
+
+.hero-bottles {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-bottle {
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: clamp(360px, 35vw, 560px);
+  max-width: none;
+  filter: drop-shadow(0 26px 25px rgba(61, 16, 75, 0.2));
+  transform-origin: 50% 70%;
+}
+
+.hero-bottle--left {
+  left: 4%;
+  transform: translateY(-52%) rotate(-9deg);
+}
+
+.hero-bottle--center {
+  z-index: 2;
+  left: 50%;
+  width: clamp(410px, 39vw, 620px);
+  transform: translate(-50%, -50%);
+}
+
+.hero-bottle--right {
+  right: 4%;
+  transform: translateY(-52%) rotate(9deg);
+}
+
+.hero-word {
+  z-index: 5;
+  top: 49%;
+  color: var(--plum);
+  font-size: clamp(6rem, 15vw, 16rem);
+  letter-spacing: -0.095em;
+  -webkit-text-stroke: 0 transparent;
+  opacity: 1;
+  text-shadow: 0.035em 0.035em 0 var(--cream);
+  transform: translate(-51%, -50%);
+}
+
+.hero__facts {
+  width: min(42vw, 570px);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.hero__facts div {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  align-items: initial;
+}
+
+.hero__facts span {
+  max-width: 112px;
+}
+
+.make {
+  min-height: 760px;
+}
+
+.make__photo {
+  min-height: 760px;
+}
+
+.make__content {
+  display: flex;
+  min-height: 760px;
+  flex-direction: column;
+  padding-top: 4.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.make__content .section-label {
+  margin-bottom: 2rem;
+}
+
+.make h2 {
+  font-size: clamp(3rem, 5.5vw, 6.4rem);
+}
+
+.make__list {
+  display: grid;
+  flex: 1;
+  grid-template-rows: repeat(3, 1fr);
+  margin-top: 2.5rem;
+}
+
+.make__list > div {
+  min-height: 0;
+  align-items: center;
+}
+
+.moment-grid {
+  min-height: 360px;
+  align-items: center;
+  gap: clamp(1.5rem, 2.6vw, 3rem);
+}
+
+.moment-grid::before {
+  display: none;
+}
+
+.moment {
+  width: min(100%, 270px);
+  justify-self: center;
+  overflow: visible;
+}
+
+.moment:nth-child(odd) {
+  transform: translateY(52px);
+}
+
+.moment:nth-child(even) {
+  transform: translateY(-52px);
+}
+
+.moment::after {
+  position: absolute;
+  z-index: -1;
+  left: calc(100% - 2px);
+  top: 50%;
+  width: clamp(2.5rem, 5vw, 6rem);
+  height: 2px;
+  background: var(--green);
+  content: "";
+  transform-origin: left center;
+}
+
+.moment:nth-child(1)::after,
+.moment:nth-child(3)::after {
+  transform: rotate(-24deg);
+}
+
+.moment:nth-child(2)::after {
+  transform: rotate(24deg);
+}
+
+.moment:last-child::after {
+  display: none;
+}
+
+.partner__content {
+  max-width: 720px;
+}
+
+.partner h2 {
+  max-width: 690px;
+  font-size: clamp(4.5rem, 9vw, 9.8rem);
+  line-height: 0.84;
+}
+
+.partner__content > p {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+  margin-top: 2.8rem;
+}
+
+.partner__word {
+  -webkit-text-stroke-width: 4px;
+  opacity: 0.58;
+}
+
+@media (max-width: 1050px) {
+  .hero-bottle { width: clamp(330px, 42vw, 480px); }
+  .hero-bottle--center { width: clamp(380px, 46vw, 530px); }
+  .moment { width: min(100%, 250px); }
+  .moment:nth-child(odd),
+  .moment:nth-child(even) { transform: none; }
+  .moment::after { display: none; }
+}
+
+@media (max-width: 780px) {
+  .hero-bottle { width: 78vw; opacity: 0.92; }
+  .hero-bottle--left { left: -32%; transform: translateY(-51%) rotate(-8deg); }
+  .hero-bottle--center { left: 50%; width: 88vw; transform: translate(-50%, -50%); }
+  .hero-bottle--right { right: -32%; transform: translateY(-51%) rotate(8deg); }
+  .hero-word {
+    top: 48%;
+    font-size: clamp(4.4rem, 19.5vw, 7rem);
+    text-shadow: 0.045em 0.045em 0 var(--cream);
+  }
+  .make,
+  .make__content { min-height: 0; }
+  .make__photo { min-height: 100vw; }
+  .make__list { display: block; }
+  .moment-grid { min-height: 0; }
+  .partner h2 { font-size: clamp(3rem, 12vw, 4.6rem); }
+  .partner__content > p { margin-top: 2rem; }
+}
+
+@media (max-width: 480px) {
+  .hero-bottle { width: 94vw; }
+  .hero-bottle--center { width: 108vw; }
+  .hero-bottle--left { left: -44%; }
+  .hero-bottle--right { right: -44%; }
+  .hero-word { font-size: 18.7vw; }
+  .moment { width: min(76vw, 280px); }
+}
