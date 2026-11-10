@@ -1,6 +1,10 @@
 @font-face {
   font-family: "Dela Gothic";
-  src: url("assets/DelaGothicOne-Regular.ttf") format("truetype");
+  src:
+    url("assets/DelaGothicOne-Regular.woff2") format("woff2"),
+    url("assets/DelaGothicOne-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
   font-display: swap;
 }
 
@@ -45,6 +49,9 @@ body {
   background: var(--cream);
   color: var(--ink);
   font-family: var(--body);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
   overflow-x: hidden;
 }
 
@@ -1915,5 +1922,99 @@ button {
     font-size: 0.86rem;
     line-height: 1.5;
     text-wrap: pretty;
+  }
+}
+
+/* Revision 06 — mobile type parity */
+@media (max-width: 780px) {
+  body,
+  button,
+  .site-header,
+  .demo-note,
+  .hero,
+  .idea,
+  .flavours,
+  .make,
+  .moments,
+  .partner,
+  .footer {
+    font-family: var(--display);
+    font-weight: 400;
+  }
+
+  .hero-stage {
+    min-height: 500px;
+    transform: translateY(0.35rem);
+  }
+
+  .hero-bottle {
+    top: 48%;
+    width: 64vw;
+    opacity: 0.88;
+  }
+
+  .hero-bottle--left {
+    left: -24%;
+    transform: translateY(-50%) rotate(-8deg);
+  }
+
+  .hero-bottle--center {
+    left: 50%;
+    width: 74vw;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-bottle--right {
+    right: -24%;
+    transform: translateY(-50%) rotate(8deg);
+  }
+
+  .hero-word {
+    top: 41%;
+    z-index: 6;
+    font-family: var(--display);
+    font-size: 17.6vw;
+    font-weight: 400;
+    letter-spacing: -0.105em;
+    -webkit-text-stroke: 1.5px var(--cream);
+    paint-order: stroke fill;
+    text-shadow: 0.045em 0.045em 0 var(--cream);
+    transform: translate(-50%, -50%);
+  }
+
+  .partner__word {
+    right: 50%;
+    bottom: -0.08em;
+    width: max-content;
+    font-family: var(--display);
+    font-size: clamp(5rem, 21vw, 7rem);
+    font-weight: 400;
+    letter-spacing: -0.1em;
+    -webkit-text-stroke: 1.5px var(--plum);
+    opacity: 0.5;
+    transform: translateX(50%) scaleX(1.08);
+    transform-origin: center bottom;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-bottle {
+    width: 66vw;
+  }
+
+  .hero-bottle--center {
+    width: 76vw;
+  }
+
+  .hero-bottle--left {
+    left: -25%;
+  }
+
+  .hero-bottle--right {
+    right: -25%;
+  }
+
+  .hero-word {
+    font-size: 17.8vw;
   }
 }
